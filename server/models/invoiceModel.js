@@ -1,9 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+      Schema   = mongoose.Schema;
 
-const invoiceModel = mongoose.Schema({
+const invoiceModel = new Schema({
     invoiceNumber : Number,
     date          : Date,
-    record        : [
+    records       : [
                       {
                         date      : Date,
                         client    : String,

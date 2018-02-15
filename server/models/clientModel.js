@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+      Schema   = mongoose.Schema;
 
-const clientModel = mongoose.Schema({
-    name: String,
-    km: Number
+const clientModel = new Schema({
+    name : String,
+    km : Number
 });
 
 module.exports = mongoose.model('Client',clientModel);

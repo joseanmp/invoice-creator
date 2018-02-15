@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+      Schema   = mongoose.Schema;
 
-const rateModel = mongoose.Schema({
+const rateModel = new Schema({
     rate: Number
 });
 

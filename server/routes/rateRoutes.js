@@ -13,12 +13,10 @@ const rateRoutes = (Rate) => {
           });
       })
       .post((req,res) => {
+        console.log(req.body);
         let rate = new Rate(req.body);
         rate.save();
         res.status(201).send(rate);
-      })
-      .put((req,res) => {
-
       });
 
     return rateRouter;
