@@ -47,11 +47,14 @@ const invoiceRoutes = (Invoice) => {
           delete req.body._id;
         }
         for(let invoiceProperty in req.body){
+          //Update properties !== records
           if(invoiceProperty !== 'records'){
             req.invoice[invoiceProperty] = req.body[invoiceProperty];
           }
+          //Check objects inside records property
           else{
             for(let recordProperty in req.body.records){
+                //Exist so update
                 if(req.body.records[recordProperty]._id){
                   let objFound = req.invoice.records.find((obj) => {
                       return obj._id == req.body.records[recordProperty]._id;
@@ -61,6 +64,7 @@ const invoiceRoutes = (Invoice) => {
                       objFound[property] = req.body.records[recordProperty][property];
                   }
                 }
+                //Doesn't exist so add
                 else{
                   req.invoice.records.push(req.body.records[recordProperty]);
                 }
