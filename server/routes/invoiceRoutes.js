@@ -78,6 +78,30 @@ const invoiceRoutes = (Invoice) => {
             else res.json(req.invoice);
         });
       })
+      /*
+      .patch((req,res) => {
+        if(req.body._id){
+          delete req.body._id;
+        }
+        for(let invoiceProperty in req.body){
+          if(invoiceProperty !== 'records'){
+            req.invoice[invoiceProperty] = req.body[invoiceProperty];
+          }
+        }
+        req.invoice.save((err) => {
+            if(err){
+              res.status(500).send(err);
+            }
+            else res.json(req.invoice);
+        });
+      });
+
+      invoiceRouter.route('/:invoiceId/records')
+        .post((req,res) => {})
+
+      invoiceRouter.route('/:invoiceId/records/:recordId')
+          .patch((req,res) => {})
+        */
 
       return invoiceRouter;
 }
