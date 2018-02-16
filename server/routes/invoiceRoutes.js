@@ -78,6 +78,14 @@ const invoiceRoutes = (Invoice) => {
             else res.json(req.invoice);
         });
       })
+      .delete((req,res) => {
+          req.invoice.remove((err) => {
+              if(err){
+                res.status(500).send(err);
+              }
+              else res.status(204).send('Invoice removed');
+          })
+      })
       /*
       .patch((req,res) => {
         if(req.body._id){

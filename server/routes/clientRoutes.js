@@ -72,6 +72,14 @@ const clientRoutes = (Client) => {
                 }
                 else res.json(req.client);
             });
+        })
+        .delete((req,res) => {
+            req.client.remove((err) => {
+              if(err){
+                res.status(500).send(err);
+              }
+              else res.status(204).send('Client removed');
+            })
         });
 
       return clientRouter;
