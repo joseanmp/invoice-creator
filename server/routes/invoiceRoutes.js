@@ -46,7 +46,33 @@ const invoiceRoutes = (Invoice) => {
         if(req.body._id){
           delete req.body._id;
         }
-        //for(let property in req.body)
+        for(let invoiceProperty in req.body){
+          if(invoiceProperty !== 'records'){
+            req.invoice[invoiceProperty] = req.body[invoiceProperty];
+          }
+          else{
+            for(let recordProperty in req.body.records){
+                if(req.body.records[recordProperty]._id){
+                  let objFound = req.invoice.records.find((obj) => {
+                      return obj._id == req.body.records[recordProperty]._id;
+                  });
+                  delete req.body.records[recordProperty]._id;
+                  for(let property in req.body.records[recordProperty]){
+                      objFound[property] = req.body.records[recordProperty][property];
+                  }
+                }
+                else{
+                  req.invoice.records.push(req.body.records[recordProperty]);
+                }
+            }
+          }
+        }
+        req.invoice.save((err) => {
+            if(err){
+              res.status(500).send(err);
+            }
+            else res.json(req.invoice);
+        });
       })
 
       return invoiceRouter;
