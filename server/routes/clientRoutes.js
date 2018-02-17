@@ -5,9 +5,11 @@ const clientRoutes = (Client) => {
           clientController  = require('../controllers/clientController')(Client);
 
     clientRouter.use('/:clientId', clientController.findClientMiddleware);
+
     clientRouter.route('/')
       .post(clientController.postClient)
       .get(clientController.getClients);
+      
     clientRouter.route('/:clientId')
       .get(clientController.getClientById)
       .put(clientController.putClientById)
